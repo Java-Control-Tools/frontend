@@ -1,17 +1,21 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html lang="en">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 	<title>Login</title>
-	<link rel="stylesheet" href="style/styles.css">
+	<link rel="stylesheet" href="style/new_styles.css">
 </head>
 <body>
-	<header><img src="img/icon.png" class="icon"><h1>Java Control Tools (JCT)</h1></header>
-	<div class="contentDiv">
-		<form method="post" action="/login">
-			<p>Password: <input class="inputPass" type="Password" name="password" placeholder="Password" required/></p>
-			<button class="button">Login</button>
+	<header><p class="headerP">Java Control Tools</p></header>
+	<div class="loginDiv">
+		<form method="POST" action="/main">
+			<input class="inputPass" type="Password" name="password" placeholder="Password" required style="margin-top: 20px;"/>
+			<br/>
+			<button id="scanButton" class="mainButton" style="margin-bottom: 20px;margin-top: 20px;" >Login</button>
 		</form>
 	</div>
 </body>

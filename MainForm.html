@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html lang="en">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -48,7 +48,7 @@
 			</div>
 			<div class="addPC">
 				<p style="color: #fff;">Scanning IP addresses</p>
-				<p><input type="text" name="ipAddress" placeholder="IP address (192.168.XX.XX)" required></p>
+				<p><input type="text" name="ipAddress" placeholder="IP address" required></p>
 				<p><input type="text" name="port" placeholder="Port (default 5556)" required></p>
 				<button id="scanButton" class="mainButton">Scan</button>
 			</div>
@@ -65,7 +65,12 @@
 			</div>
 		</div>
 		<div id="controlShow">
-			
+			<p style="margin-left: 11px;font-size: 20px;">Remote access</p>
+			<div class="settingsBox">
+				<button class="settingsButton" onclick="">Power off</button>
+				<button class="settingsButton" onclick="">Reboot</button>
+				<button class="settingsButton" onclick="">Log out</button>
+			</div>
 		</div>
 	</div>
 </body>

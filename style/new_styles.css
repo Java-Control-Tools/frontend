@@ -3,7 +3,15 @@ header {
   display: flex;
   text-align: center;
 }
-
+.loginDiv{
+  margin: 108px;
+  border-radius: 20px;
+  margin-left: 39%;
+  margin-top: 5%;
+  margin-right: 38%;
+  background: #758CAA;
+  text-align: center;
+}
 body {
   background: #e8e9ec;
   margin: 0;
