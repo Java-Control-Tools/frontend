@@ -1,0 +1,162 @@
+header {
+  background: #2d4ea5;
+  display: flex;
+  text-align: center;
+}
+
+body {
+  background: #e8e9ec;
+  margin: 0;
+}
+p{
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-size: 16px;
+  font-style: normal;
+  color: #0d47a1;
+}
+
+.headerP{
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-size: 30px;
+  font-style: normal;
+  color: #fff;
+  flex-basis: 100%;
+  margin: 35px;
+}
+
+.leftDiv {
+  background: #0d47a1;
+  position: fixed;
+  height: 100%;
+}
+
+.mainButton {
+  color: #fff;
+  background: #060b55;
+  cursor: pointer;
+  border-radius: 167px;
+  border-style: none;
+  width: 170px;
+  height: 48px;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-size: 16px;
+  font-style: normal;
+  transition: 0.5s;
+  margin-top: 10px;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+.mainButton:hover{
+  background: #0277bd;
+}
+
+.rightDiv{
+  padding-left: 272px;
+}
+.JCDiv {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-size: 16px;
+  font-style: normal;
+  color: #2d4ea5;
+  padding-bottom: 5%;
+  display: grid;
+}
+th {
+  border-style: solid;
+  border-color: #2d4ea5;
+  color: #2d4ea5;
+}
+td {
+  border-style: solid;
+  border-color: #2d4ea5;
+  color: #2d4ea5;
+}
+.buttonTable {
+  color: #0d47a1;
+  background: 0;
+  cursor: pointer;
+  transition: 0.5s;
+  border: 0;
+  font-size: 16px;
+  width: 100%;
+}
+.buttonTable:hover{
+  background: #5890c4;
+  color: #fff;
+}
+input{
+  Font-size: 1.1rem;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+input:hover{
+  background: #5890c4;
+  border-color: #5890c4;
+  color: #fff;
+}
+input:focus{
+  background: #5890c4;
+  border-color: #5890c4;
+  color: #fff;
+}
+#controlShow{
+  display: none;
+}
+#jcShow{
+  display: none;
+}
+#settingsShow{
+  display: none;
+}
+
+#scanButton{
+  width: 99px;
+  height: 30px;
+  background:  #2d4ea5;
+  transition: 0.5s;
+}
+
+#scanButton:hover{
+  background: #5890c4;
+}
+
+.addPC{
+  border: 10px solid;
+  text-align: center;
+  margin-left: 30%;
+  border-color: #758CAA;
+  background: #758CAA;
+  border-radius: 20px;
+  margin-right: 48%;
+}
+.settingsBox {
+  border: 2px solid;
+  margin: 10px;
+  border-color: #b3b3b3;
+  border-radius: 10px;
+}
+.settingsButton {
+  cursor: pointer;
+  border: none;
+  background: #2d4ea5;
+  color: #fff;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-size: 16px;
+  font-style: normal;
+  border-radius: 49px;
+  width: 150px;
+  height: 50px;
+  margin-left: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  transition: 0.5s;
+}
+.settingsButton:hover{
+  background: #5890c4;
+}
