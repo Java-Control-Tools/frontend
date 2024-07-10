@@ -112,6 +112,12 @@ input:focus{
   border-color: #5890c4;
   color: #fff;
 }
+#loginForm{
+  display: block;
+}
+#mainForm{
+  display: none;
+}
 #controlShow{
   display: none;
 }

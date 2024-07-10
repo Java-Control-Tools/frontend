@@ -12,39 +12,48 @@
 	<script type="text/javascript" src="js/mainScript.js"></script>
 </head>
 <body>
-	<header>
-		<p class="headerP">Main menu</p>
-	</header>
-	<div class="leftDiv">
-		<button class="mainButton" onclick="jcShow()">View all PCs with Java control(JC)</button>
-		<br/>
-		<button class="mainButton" onclick="settingsShow()">Settings</button>
-		<br/>
-		<button class="mainButton" >Log out</button>
+	<div class="loginForm">
+		<header><p class="headerP">Java Control Tools</p></header>
+		<div class="loginDiv">
+			<input class="inputPass" type="Password" placeholder="Password" required style="margin-top: 20px;"/>
+			<br/>
+			<button id="scanButton" class="mainButton" style="margin-bottom: 20px;margin-top: 20px;" onclick="login()">Login</button>
+		</div>
 	</div>
-	<div class="rightDiv">
-		<div id="jcShow">
-			<div class="JCDiv">
-			<table>
-				<thead>
-					<tr>
-						<th>IP</th>
-						<th>Port</th>
-						<th>Status</th>
-						<th>Control</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>192.168.0.1</td>
-						<td></td>
-						<td>Active</td>
-						<td>
-							<button class="buttonTable" onclick="controlShow()">Control</button>
-						</td>
-					</tr>
-				</tbody>
-			</table>
+	<div id="mainForm" >
+		<header>
+			<p class="headerP">Main menu</p>
+		</header>
+		<div class="leftDiv">
+			<button class="mainButton" onclick="jcShow()">View all PCs with Java control(JC)</button>
+			<br/>
+			<button class="mainButton" onclick="settingsShow()">Settings</button>
+			<br/>
+			<button class="mainButton" >Log out</button>
+		</div>
+		<div class="rightDiv">
+			<div id="jcShow">
+				<div class="JCDiv">
+					<table>
+						<thead>
+							<tr>
+								<th>IP</th>
+								<th>Port</th>
+								<th>Status</th>
+								<th>Control</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>192.168.0.1</td>
+								<td></td>
+								<td>Active</td>
+								<td>
+									<button class="buttonTable" onclick="controlShow()">Control</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
 			</div>
 			<div class="addPC">
 				<p style="color: #fff;">Scanning IP addresses</p>
@@ -70,6 +79,7 @@
 				<button class="settingsButton" onclick="">Power off</button>
 				<button class="settingsButton" onclick="">Reboot</button>
 				<button class="settingsButton" onclick="">Log out</button>
+			</div>
 			</div>
 		</div>
 	</div>

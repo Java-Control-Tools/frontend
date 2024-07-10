@@ -3,8 +3,6 @@ function jcShow() {
 	$("#jcShow").show();
 	$("#settingsShow").hide();
 	$("#controlShow").hide();
-
-
 }
 function settingsShow(){
 	$(".headerP").text("Settings");
@@ -14,12 +12,7 @@ function settingsShow(){
 
 }
 function controlShow(){
-	let ipAdress = $.ajax({
-		url: "http://localhost:8080/api/test",
-		metod: "get",
-		dataType: "json",
-	});
-	$(".headerP").text(ipAdress[1]);
+	$(".headerP").text();
 	$("#jcShow").hide();
 	$("#controlShow").show();
 	$("#settingsShow").hide();
@@ -38,4 +31,12 @@ function changePassword(){
 			alert("Password changed");
 		}
 	}
+}
+function login(){
+	let password = $(".inputPass").val();
+	$.ajax({
+		url:"http://localhost:8080/api/login/login?password=" + password,
+		method:"post",
+		dataType: "json"
+	});
 }
