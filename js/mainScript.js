@@ -1,3 +1,6 @@
+$(function(){
+	
+});
 function jcShow() {
 	$(".headerP").text("Java control");
 	$("#jcShow").show();
@@ -33,10 +36,17 @@ function changePassword(){
 	}
 }
 function login(){
-	let password = $(".inputPass").val();
+	let passwordSend = $(".inputPass").val();
 	$.ajax({
-		url:"http://localhost:8080/api/login/login?password=" + password,
+		url:"http://localhost:8080/api/login/check",
 		method:"post",
-		dataType: "json"
+		dataType: "json",
+		data: {password : passwordSend},
+		success: function (data) {
+					if(data.status == "OK"){
+						$("#loginForm").hide();
+						$("#mainForm").show();
+					}
+                }
 	});
 }
