@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Main</title>
-	<link href="style/new_styles.css" rel="stylesheet" type="text/css">
+	<link href="style/styles.css" rel="stylesheet" type="text/css">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
@@ -29,12 +29,12 @@
 			<br/>
 			<button class="mainButton" onclick="settingsShow()">Settings</button>
 			<br/>
-			<button class="mainButton" >Log out</button>
+			<button class="mainButton" onclick="logout()" >Log out</button>
 		</div>
 		<div class="rightDiv">
 			<div id="jcShow">
 				<div class="JCDiv">
-					<table>
+					<table id = "tableUsers">
 						<thead>
 							<tr>
 								<th>IP</th>
@@ -43,26 +43,20 @@
 								<th>Control</th>
 							</tr>
 						</thead>
-						<tbody>
-							<tr>
-								<td>192.168.0.1</td>
-								<td></td>
-								<td>Active</td>
-								<td>
-									<button class="buttonTable" onclick="controlShow()">Control</button>
-								</td>
-							</tr>
+						<tbody id = "tableBody">
 						</tbody>
 					</table>
 			</div>
 			<div class="addPC">
 				<p style="color: #fff;">Scanning IP addresses</p>
-				<p><input type="text" name="ipAddress" placeholder="IP address" required></p>
-				<p><input type="text" name="port" placeholder="Port (default 5556)" required></p>
-				<button id="scanButton" class="mainButton">Scan</button>
+				<form>
+					<p><input type="text" name="ipAddress" placeholder="IP address" required></p>
+					<p><input type="text" name="port" placeholder="Port (default 5556)"></p>
+					<button id="scanButton" class="mainButton">Scan</button>
+				</form>
 			</div>
-		</div>
-		<div id="settingsShow">
+			</div>
+			<div id="settingsShow">
 			<p style="margin-left: 11px;font-size: 20px;">Server settings</p>
 			<div class="settingsBox">
 				<button class="settingsButton" onclick="rebootServer()">Reboot server</button>
@@ -72,14 +66,18 @@
 			<div class="settingsBox">
 				<button class="settingsButton" onclick="changePassword()">Change password</button>
 			</div>
-		</div>
-		<div id="controlShow">
-			<p style="margin-left: 11px;font-size: 20px;">Remote access</p>
-			<div class="settingsBox">
-				<button class="settingsButton" onclick="">Power off</button>
-				<button class="settingsButton" onclick="">Reboot</button>
-				<button class="settingsButton" onclick="">Log out</button>
 			</div>
+			<div id="controlShow">
+				<p style="margin-left: 11px;font-size: 20px;">Remote access</p>
+				<div class="settingsBox">
+					<button class="settingsButton" onclick="sendCommandToUserPC('powerOff')">Power off</button>
+					<button class="settingsButton" onclick="sendCommandToUserPC('reboot')">Reboot</button>
+					<button class="settingsButton" onclick="sendCommandToUserPC('logOut')">Log out</button>
+				</div>
+				<p style="margin-left: 11px;font-size: 20px;">Managing a table entry</p>
+				<div class="settingsBox">
+					<button class="settingsButton" onclick="deleteUser()">Delete</button>
+				</div>
 			</div>
 		</div>
 	</div>
