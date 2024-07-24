@@ -3,26 +3,34 @@ let portGlobal;
 let statusGlobal;
 const API_URL = "http://localhost:8080/";
 
+function errorStatus(status){
+	if(status === "ERROR_ENTITY_ALREADY_EXISTS"){
+		alert("Error! Entity already exists!");
+	}
+	else if(status === "ERROR"){
+		alert("Error! Bad request!");
+	}
+}
 $(function(){ 
 	$(".inputPass").val("");
-	$("form").submit(function (e){ // Привязка к форме, делаем отправку через аякс без обновления 
+	$("form").submit(function (e){ // Привязка к форме, делаем отправку через аякс без обновления
 		let sendData = $(this).serialize();
-        $.ajax({
+
+        $.ajax({ //Добавление пользователя
         	url: API_URL + "api/jc/addUserPC",
         	method: "post",
         	dataType: "json",
             data: sendData,
             success: function (data) {
-            	console.log(data.status);
                 if(data.status === "OK"){
-               	   showUsers();
+					showUsers();
+					$("input").val("");
                 }
-                else if (data.status === "ERROR"){
-                	alert("Error!");
-                	showUsers();
-                }
-
-            }
+            },
+			error: function (data){
+				errorStatus(data.responseJSON.status);
+				$("input").val("");
+			}
 		});
 		e.preventDefault();
  	});
@@ -84,9 +92,9 @@ function changePassword(){
 							alert("Success!");
 							jcShow();
 						}
-						else if(data.status === "ERROR"){
-							alert("Error!");
-						}
+					},
+					error: function (data) {
+						errorStatus(data.responseJSON.status);
 					}
 				});
 
@@ -125,15 +133,15 @@ function logout(){
 }
 function showUsers(){
 	$.ajax({
-		url: API_URL + "api/jc/showUsers",
+		url: API_URL + "api/jc/showUsersPC",
 		method: "get",
 		dataType: "json",
 		success: function(data){
 			$("#tableBody").empty();
 			data.forEach((user) => {
-				$("#tableUsers").append("<tr><td>" + user.ipAddress 
-					+ "</td><td>" + user.port 
-					+ "</td><td>" + user.status 
+				$("#tableUsers").append("<tr><td>" + user.ipAddress
+					+ "</td><td>" + user.port
+					+ "</td><td>" + user.status
 					+ "</td><td><button class='buttonTable' onclick='controlShow(\""+ user.ipAddress + "\",\"" + user.port +"\",\""+ user.status + "\")'>Control</button></td></tr>");
 			});
 		}
@@ -141,10 +149,10 @@ function showUsers(){
 }
 function sendCommandToUserPC(comm) {
 	if(statusGlobal === "active"){
-		let choose = confirm("You are sure?");;
+		let choose = confirm("You are sure?");
 		if(choose){
 			$.ajax({
-				url: API_URL + "api/jc/control",
+				url: API_URL + "api/jc/controlUserPC",
 				method: "post",
 				dataType: "json",
 				data: { ipAddress : ipGlobal, port: portGlobal, command: comm},
@@ -153,10 +161,9 @@ function sendCommandToUserPC(comm) {
 						alert("Success!");
 						jcShow();
 					}
-					else if (data.status === "ERROR"){
-						alert("Error!");
-						jcShow();
-					}
+				},
+				error: function (data){
+					errorStatus(data.responseJSON.status);
 				}
 			});
 		}
@@ -167,7 +174,7 @@ function sendCommandToUserPC(comm) {
 }
 function deleteUser(){
 	$.ajax({
-		url: API_URL + "api/jc/deleteUser",
+		url: API_URL + "api/jc/deleteUserPC",
 		method: "post",
 		dataType: "json",
 		data: {ipAddress : ipGlobal, port: portGlobal},
@@ -176,10 +183,9 @@ function deleteUser(){
 				alert("Success!");
 				jcShow();
 			}
-			else if(data.status === "ERROR"){
-				alert("Error!");
-				jcShow();
-			}
+		},
+		error: function (data){
+			errorStatus(data.responseJSON.status);
 		}
 	});
 }

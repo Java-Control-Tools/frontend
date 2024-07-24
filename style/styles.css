@@ -2,6 +2,7 @@ header {
   background: #2d4ea5;
   display: flex;
   text-align: center;
+  height: 105px;
 }
 .loginDiv{
   margin: 108px;
@@ -174,4 +175,13 @@ input:focus{
 }
 .settingsButton:hover{
   background: #5890c4;
+}
+@media (max-width: 380px){
+  header{
+    height: 65px;
+  }
+  .headerP{
+    font-size: 25px;
+    margin: 13px;
+  }
 }
