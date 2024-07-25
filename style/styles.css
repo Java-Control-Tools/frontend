@@ -114,10 +114,10 @@ input:focus{
   color: #fff;
 }
 #loginForm{
-  display: none;
+  display: block;
 }
 #mainForm{
-  display: block;
+  display: none;
 }
 #controlShow{
   display: none;
@@ -210,7 +210,7 @@ input:focus{
   }
   .addPC {
     margin-left: 22%;
-    margin-right: 21%;
+    margin-right: 18%;
   }
   input{
     font-size: 14px;
