@@ -42,6 +42,7 @@ function jcShow() {
 	$("#jcShow").show();
 	$("#settingsShow").hide();
 	$("#controlShow").hide();
+	$("#logShow").hide();
 	showUsers();
 }
 function settingsShow(){
@@ -49,6 +50,7 @@ function settingsShow(){
 	$("#jcShow").hide();
 	$("#controlShow").hide();
 	$("#settingsShow").show();
+	$("#logShow").hide();
 
 }
 function controlShow(ipAddress, port, status){ //Заход на пользователя
@@ -59,6 +61,7 @@ function controlShow(ipAddress, port, status){ //Заход на пользов�
 	$("#jcShow").hide();
 	$("#controlShow").show();
 	$("#settingsShow").hide();
+	$("#logShow").hide();
 }
 function rebootServer(){
 	let result = confirm("You are sure?");
@@ -186,6 +189,23 @@ function deleteUser(){
 		},
 		error: function (data){
 			errorStatus(data.responseJSON.status);
+		}
+	});
+}
+function showLogs(){
+	$("#logShow").empty();
+	$(".headerP").text("Logs");
+	$("#jcShow").hide();
+	$("#controlShow").hide();
+	$("#settingsShow").hide();
+	$("#logShow").show();
+	$.ajax({
+		url: API_URL + "api/server/showLogs",
+		method: "get",
+		success: function (data){
+			data.forEach(log => {
+				$("#logShow").append("<p>" + log + "</p>");
+			})
 		}
 	});
 }

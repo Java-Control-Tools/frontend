@@ -128,6 +128,10 @@ input:focus{
 #settingsShow{
   display: none;
 }
+#logShow{
+  display: none;
+  margin-bottom: 109px;
+}
 
 #scanButton{
   width: 99px;
@@ -186,11 +190,12 @@ input:focus{
     flex-basis: 100%;
   }
   .leftDiv{
-    position: absolute;
+    position: fixed;
     height: 65px;
     bottom: 0;
     width: 100vw;
     display: flex;
+    /*! top: 222px; */
   }
   .mainButton{
     width: 135px;
