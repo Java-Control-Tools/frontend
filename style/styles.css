@@ -5,11 +5,8 @@ header {
   height: 105px;
 }
 .loginDiv{
-  margin: 108px;
   border-radius: 20px;
-  margin-left: 39%;
-  margin-top: 5%;
-  margin-right: 38%;
+  margin: 5% 38% 108px 39%;
   background: #758CAA;
   text-align: center;
 }
@@ -36,9 +33,9 @@ p{
 }
 
 .leftDiv {
+  display: block;
   background: #0d47a1;
-  position: fixed;
-  height: 100%;
+  height: 100vh;
 }
 
 .mainButton {
@@ -62,9 +59,11 @@ p{
 .mainButton:hover{
   background: #0277bd;
 }
-
+.contentDiv{
+  display: flex;
+}
 .rightDiv{
-  padding-left: 272px;
+  flex-basis: 100%;
 }
 .JCDiv {
   font-family: "Montserrat", sans-serif;
@@ -142,18 +141,16 @@ input:focus{
 }
 
 .addPC{
-  border: 10px solid;
   text-align: center;
-  margin-left: 30%;
-  border-color: #758CAA;
+  margin-left: 27%;
+  border: 10px solid #758CAA;
   background: #758CAA;
   border-radius: 20px;
   margin-right: 48%;
 }
 .settingsBox {
-  border: 2px solid;
   margin: 10px;
-  border-color: #b3b3b3;
+  border: 2px solid #b3b3b3;
   border-radius: 10px;
 }
 .settingsButton {
@@ -176,12 +173,52 @@ input:focus{
 .settingsButton:hover{
   background: #5890c4;
 }
-@media (max-width: 380px){
+#showMenu{
+  display: none;
+}
+@media (max-width: 430px){
   header{
     height: 65px;
   }
   .headerP{
     font-size: 25px;
-    margin: 13px;
+    margin: 16px;
+    flex-basis: 100%;
+  }
+  .leftDiv{
+    position: absolute;
+    height: 65px;
+    bottom: 0;
+    width: 100vw;
+    display: flex;
+  }
+  .mainButton{
+    width: 135px;
+    font-size: 12px;
+    margin-left: 3px;
+    margin-right: 4px;
+    margin-bottom: 11px;
+  }
+  td {
+    font-size: 16px;
+  }
+  .JCDiv {
+    font-size: 14px;
+  }
+  .buttonTable {
+    font-size: 16px;
+  }
+  .addPC {
+    margin-left: 22%;
+    margin-right: 21%;
+  }
+  input{
+    font-size: 14px;
+  }
+  #scanButton{
+    font-size: 14px;
+  }
+  .loginDiv{
+    margin: 15% 15% 3% 15%;
   }
 }

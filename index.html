@@ -24,59 +24,61 @@
 		<header>
 			<p class="headerP">Main menu</p>
 		</header>
-		<div class="leftDiv">
-			<button class="mainButton" onclick="jcShow()">View all PCs with Java control(JC)</button>
-			<br/>
-			<button class="mainButton" onclick="settingsShow()">Settings</button>
-			<br/>
-			<button class="mainButton" onclick="logout()" >Log out</button>
-		</div>
-		<div class="rightDiv">
-			<div id="jcShow">
-				<div class="JCDiv">
-					<table id = "tableUsers">
-						<thead>
-							<tr>
-								<th>IP</th>
-								<th>Port</th>
-								<th>Status</th>
-								<th>Control</th>
-							</tr>
-						</thead>
-						<tbody id = "tableBody">
-						</tbody>
-					</table>
+		<div class = "contentDiv">
+			<div class="leftDiv">
+				<button class="mainButton" onclick="jcShow()">View all PCs with Java control(JC)</button>
+				<br/>
+				<button class="mainButton" onclick="settingsShow()">Settings</button>
+				<br/>
+				<button class="mainButton" onclick="logout()" >Log out</button>
 			</div>
-			<div class="addPC">
-				<p style="color: #fff;">Scanning IP addresses</p>
-				<form>
-					<p><input type="text" name="ipAddress" placeholder="IP address" maxlength="16" minlength="7" pattern="((25[0-5]|(2[0-4]|1\d|[0-9]|)\d)\.?\b){4}" required></p>
-					<p><input type="text" name="port" placeholder="Port (default 5556)" maxlength="5" pattern="[0-9]*"></p>
-					<button id="scanButton" class="mainButton">Scan</button>
-				</form>
-			</div>
-			</div>
-			<div id="settingsShow">
-			<p style="margin-left: 11px;font-size: 20px;">Server settings</p>
-			<div class="settingsBox">
-				<button class="settingsButton" onclick="rebootServer()">Reboot server</button>
-				<button class="settingsButton">Show server logs</button>
-			</div>
-			<p style="margin-left: 11px;font-size: 20px;">Account settings</p>
-			<div class="settingsBox">
-				<button class="settingsButton" onclick="changePassword()">Change password</button>
-			</div>
-			</div>
-			<div id="controlShow">
-				<p style="margin-left: 11px;font-size: 20px;">Remote access</p>
-				<div class="settingsBox">
-					<button class="settingsButton" onclick="sendCommandToUserPC('powerOff')">Power off</button>
-					<button class="settingsButton" onclick="sendCommandToUserPC('reboot')">Reboot</button>
-					<button class="settingsButton" onclick="sendCommandToUserPC('logOut')">Log out</button>
+			<div class="rightDiv">
+				<div id="jcShow">
+					<div class="JCDiv">
+						<table id = "tableUsers">
+							<thead>
+								<tr>
+									<th>IP</th>
+									<th>Port</th>
+									<th>Status</th>
+									<th>Control</th>
+								</tr>
+							</thead>
+							<tbody id = "tableBody">
+							</tbody>
+						</table>
+					</div>
+					<div class="addPC">
+						<p style="color: #fff;">Scanning IP addresses</p>
+						<form>
+							<p><input type="text" name="ipAddress" placeholder="IP address" maxlength="16" minlength="7" pattern="((25[0-5]|(2[0-4]|1\d|[0-9]|)\d)\.?\b){4}" required></p>
+							<p><input type="text" name="port" placeholder="Port (default 5556)" maxlength="5" pattern="[0-9]*"></p>
+							<button id="scanButton" class="mainButton">Scan</button>
+						</form>
+					</div>
 				</div>
-				<p style="margin-left: 11px;font-size: 20px;">Managing a table entry</p>
-				<div class="settingsBox">
-					<button class="settingsButton" onclick="deleteUser()">Delete</button>
+				<div id="settingsShow">
+					<p style="margin-left: 11px;font-size: 20px;">Server settings</p>
+					<div class="settingsBox">
+						<button class="settingsButton" onclick="rebootServer()">Reboot server</button>
+						<button class="settingsButton">Show server logs</button>
+					</div>
+					<p style="margin-left: 11px;font-size: 20px;">Account settings</p>
+					<div class="settingsBox">
+						<button class="settingsButton" onclick="changePassword()">Change password</button>
+					</div>
+				</div>
+				<div id="controlShow">
+					<p style="margin-left: 11px;font-size: 20px;">Remote access</p>
+					<div class="settingsBox">
+						<button class="settingsButton" onclick="sendCommandToUserPC('powerOff')">Power off</button>
+						<button class="settingsButton" onclick="sendCommandToUserPC('reboot')">Reboot</button>
+						<button class="settingsButton" onclick="sendCommandToUserPC('logOut')">Log out</button>
+					</div>
+					<p style="margin-left: 11px;font-size: 20px;">Managing a table entry</p>
+					<div class="settingsBox">
+						<button class="settingsButton" onclick="deleteUser()">Delete</button>
+					</div>
 				</div>
 			</div>
 		</div>
