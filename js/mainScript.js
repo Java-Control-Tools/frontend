@@ -1,7 +1,7 @@
 let ipGlobal; //Похуй + похуй потом исправлю 
 let portGlobal;
 let statusGlobal;
-const API_URL = "http://localhost:8080/";
+const API_URL = "http://192.168.0.11:8080/";
 
 function errorStatus(status){
 	if(status === "ERROR_ENTITY_ALREADY_EXISTS"){
@@ -142,10 +142,18 @@ function showUsers(){
 		success: function(data){
 			$("#tableBody").empty();
 			data.forEach((user) => {
-				$("#tableUsers").append("<tr><td>" + user.ipAddress
-					+ "</td><td>" + user.port
-					+ "</td><td>" + user.status
-					+ "</td><td><button class='buttonTable' onclick='controlShow(\""+ user.ipAddress + "\",\"" + user.port +"\",\""+ user.status + "\")'>Control</button></td></tr>");
+				if(user.status === "active"){
+					$("#tableUsers").append("<tr><td>" + user.ipAddress
+						+ "</td><td>" + user.port
+						+ "</td><td style='color: green'>" + user.status
+						+ "</td><td><button class='buttonTable' onclick='controlShow(\""+ user.ipAddress + "\",\"" + user.port +"\",\""+ user.status + "\")'>Control</button></td></tr>");
+				}
+				else if(user.status === "inactive"){
+					$("#tableUsers").append("<tr><td>" + user.ipAddress
+						+ "</td><td>" + user.port
+						+ "</td><td style='color: red'>" + user.status
+						+ "</td><td><button class='buttonTable' onclick='controlShow(\""+ user.ipAddress + "\",\"" + user.port +"\",\""+ user.status + "\")'>Control</button></td></tr>");
+				}
 			});
 		}
 	});
