@@ -1,8 +1,34 @@
 let ipGlobal; //Похуй + похуй потом исправлю 
 let portGlobal;
 let statusGlobal;
-const API_URL = "http://192.168.0.11:8080/";
+const API_URL = "http://localhost:8080/";
 
+$(function (){
+	$("#changePassDiv").submit(function(e){
+		if($("#newPassword").val() === $("#confirmPassword").val()){
+			$.ajax({
+				url: API_URL + "api/login/changePassword",
+				method: "post",
+				dataType: "json",
+				data: {newPassword: $("#newPassword").val(), password: $("#oldPassword").val()},
+				success: function(data){
+					if(data.status === "OK"){
+						alert("Successful!");
+						$("#changePassDiv").bPopup().close();
+						$("input").val("");
+					}
+				},
+				error: function(data){
+					errorStatus(data.responseJSON.status)
+				}
+			});
+		}
+		else {
+			alert("The entered passwords do not match!");
+		}
+		e.preventDefault();
+	});
+});
 function errorStatus(status){
 	if(status === "ERROR_ENTITY_ALREADY_EXISTS"){
 		alert("Error! Entity already exists!");
@@ -10,58 +36,6 @@ function errorStatus(status){
 	else if(status === "ERROR"){
 		alert("Error! Bad request!");
 	}
-}
-$(function(){ 
-	$(".inputPass").val("");
-	$("form").submit(function (e){ // Привязка к форме, делаем отправку через аякс без обновления
-		let sendData = $(this).serialize();
-
-        $.ajax({ //Добавление пользователя
-        	url: API_URL + "api/jc/addUserPC",
-        	method: "post",
-        	dataType: "json",
-            data: sendData,
-            success: function (data) {
-                if(data.status === "OK"){
-					showUsers();
-					$("input").val("");
-                }
-            },
-			error: function (data){
-				errorStatus(data.responseJSON.status);
-				$("input").val("");
-			}
-		});
-		e.preventDefault();
- 	});
-	login();
-
-});
-function jcShow() {
-	$(".headerP").text("Java control");
-	$("#jcShow").show();
-	$("#settingsShow").hide();
-	$("#controlShow").hide();
-	$("#logShow").hide();
-	showUsers();
-}
-function settingsShow(){
-	$(".headerP").text("Settings");
-	$("#jcShow").hide();
-	$("#controlShow").hide();
-	$("#settingsShow").show();
-	$("#logShow").hide();
-
-}
-function controlShow(ipAddress, port, status){ //Заход на пользователя
-	ipGlobal = ipAddress;
-	portGlobal = port;
-	statusGlobal = status;
-	$(".headerP").text(ipAddress + ":" + port + " - " + status);
-	$("#jcShow").hide();
-	$("#controlShow").show();
-	$("#settingsShow").hide();
-	$("#logShow").hide();
 }
 function rebootServer(){
 	let result = confirm("You are sure?");
@@ -73,37 +47,7 @@ function rebootServer(){
 	}
 }
 function changePassword(){
-	let oldPassword = prompt("Enter password");
-
-	if (oldPassword !== "" && oldPassword != null){
-
-		let newPasswordSend = prompt("Enter a new password");
-
-		if(newPasswordSend !== "" && newPasswordSend != null){
-
-			let confirmNewPassword = prompt("Confirm your new password");
-
-			if(newPasswordSend === confirmNewPassword){
-
-				$.ajax({
-					url: API_URL + "api/login/changePassword",
-					method: "post",
-					dataType: "json",
-					data: {newPassword: newPasswordSend, password: oldPassword},
-					success: function(data){
-						if(data.status === "OK"){
-							alert("Success!");
-							jcShow();
-						}
-					},
-					error: function (data) {
-						errorStatus(data.responseJSON.status);
-					}
-				});
-
-			}
-		}
-	}
+	$("#changePassDiv").bPopup();
 }
 function login(){
 	let passwordSend = $(".inputPass").val();
@@ -117,7 +61,7 @@ function login(){
 						$("#loginForm").hide();
 						$("#mainForm").show();
 					}
-                }
+		}
 	});
 }
 function logout(){
@@ -134,85 +78,62 @@ function logout(){
 		});
 	}
 }
-function showUsers(){
-	$.ajax({
-		url: API_URL + "api/jc/showUsersPC",
-		method: "get",
-		dataType: "json",
-		success: function(data){
-			$("#tableBody").empty();
-			data.forEach((user) => {
-				if(user.status === "active"){
-					$("#tableUsers").append("<tr><td>" + user.ipAddress
-						+ "</td><td>" + user.port
-						+ "</td><td style='color: green'>" + user.status
-						+ "</td><td><button class='buttonTable' onclick='controlShow(\""+ user.ipAddress + "\",\"" + user.port +"\",\""+ user.status + "\")'>Control</button></td></tr>");
-				}
-				else if(user.status === "inactive"){
-					$("#tableUsers").append("<tr><td>" + user.ipAddress
-						+ "</td><td>" + user.port
-						+ "</td><td style='color: red'>" + user.status
-						+ "</td><td><button class='buttonTable' onclick='controlShow(\""+ user.ipAddress + "\",\"" + user.port +"\",\""+ user.status + "\")'>Control</button></td></tr>");
-				}
-			});
-		}
-	});
-}
 function sendCommandToUserPC(comm) {
 	if(statusGlobal === "active"){
-		let choose = confirm("You are sure?");
-		if(choose){
+		if(comm === "screen"){ //Если нам нужен скрин
 			$.ajax({
 				url: API_URL + "api/jc/controlUserPC",
 				method: "post",
 				dataType: "json",
 				data: { ipAddress : ipGlobal, port: portGlobal, command: comm},
 				success: function(data) {
-					if(data.status === "OK"){
-						alert("Success!");
-						jcShow();
-					}
+					$("#control").hide();
+					$("#screenShow").empty().show().append("<img src= " + API_URL + "files/photo?id="+ Math.random() +"  alt=''/>");
 				},
 				error: function (data){
 					errorStatus(data.responseJSON.status);
 				}
 			});
+
+		}
+		else {
+			let choose = confirm("You are sure?");
+			if(choose){
+				$.ajax({
+					url: API_URL + "api/jc/controlUserPC",
+					method: "post",
+					dataType: "json",
+					data: { ipAddress : ipGlobal, port: portGlobal, command: comm},
+					success: function(data) {
+						if(data.status === "OK"){
+							alert("Successful!");
+							jcShow();
+						}
+					},
+					error: function (data){
+						errorStatus(data.responseJSON.status);
+					}
+				});
+			}
 		}
 	}
 	else{
 		alert("PC inactive!");
 	}
 }
-function deleteUser(){
-	$.ajax({
-		url: API_URL + "api/jc/deleteUserPC",
-		method: "post",
-		dataType: "json",
-		data: {ipAddress : ipGlobal, port: portGlobal},
-		success: function(data) {
-			if(data.status === "OK"){
-				alert("Success!");
-				jcShow();
-			}
-		},
-		error: function (data){
-			errorStatus(data.responseJSON.status);
-		}
-	});
-}
-function showLogs(){
-	$("#logShow").empty();
+function showLogs(){ //Вывод логов
+	$("#logShow").show();
+	$("#logView").empty();
 	$(".headerP").text("Logs");
 	$("#jcShow").hide();
 	$("#controlShow").hide();
 	$("#settingsShow").hide();
-	$("#logShow").show();
 	$.ajax({
 		url: API_URL + "api/server/showLogs",
 		method: "get",
 		success: function (data){
 			data.forEach(log => {
-				$("#logShow").append("<p>" + log + "</p>");
+				$("#logView").append(log + "\n");
 			})
 		}
 	});

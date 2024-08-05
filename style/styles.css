@@ -4,6 +4,9 @@ header {
   text-align: center;
   height: 105px;
 }
+img{
+  width: 100%;
+}
 .loginDiv{
   border-radius: 20px;
   margin: 5% 38% 108px 39%;
@@ -132,7 +135,9 @@ input:focus{
   display: none;
   margin-bottom: 109px;
 }
-
+#screenShow{
+  display: none;
+}
 #scanButton{
   width: 99px;
   height: 30px;
@@ -180,7 +185,39 @@ input:focus{
 #showMenu{
   display: none;
 }
+#logView{
+  width: 98%;
+  height: 85vh;
+  resize: none;
+  font-size: 16px;
+}
+#updateDiv{
+  display: none;
+  background: #ffffff;
+  text-align: center;
+  border-radius: 25px;
+  border: solid 2px gray;
+}
+#changePassDiv{
+  display: none;
+  background: #ffffff;
+  text-align: center;
+  border-radius: 25px;
+  border: solid 2px gray;
+}
 @media (max-width: 430px){
+  #logView{
+    font-size: 12px;
+    height: 70vh;
+  }
+  #ico{
+    margin-top: 0;
+    width: 100px;
+    height: 100px;
+  }
+  img{
+    margin-top: 50%;
+  }
   header{
     height: 65px;
   }

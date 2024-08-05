@@ -4,15 +4,18 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	<meta charset="utf-8">
 	<title>Main</title>
-	<link href="style/styles.css" rel="stylesheet" type="text/css">
+	<link type="text/css" href="style/styles.css" rel="stylesheet">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<script type="text/javascript" src="js/jquery-3.7.1.min.js"></script>
+	<script type="text/javascript" src="js/jquery.bpopup.js"></script>
 	<script type="text/javascript" src="js/mainScript.js"></script>
+	<script type="text/javascript" src="js/showingContentBlocks.js"></script>
+	<script type="text/javascript" src="js/crudOperationsForUsers.js"></script>
 </head>
 <body>
-	<div id="loginForm">
+	<div id="loginForm"> <!--Форма логина-->
 		<header><p class="headerP">Java Control Tools</p></header>
 		<div class="loginDiv">
 			<input class="inputPass" type="Password" placeholder="Password" required style="margin-top: 20px;"/>
@@ -20,20 +23,20 @@
 			<button id="scanButton" class="mainButton" style="margin-bottom: 20px;margin-top: 20px;" onclick="login()">Login</button>
 		</div>
 	</div>
-	<div id="mainForm" >
+	<div id="mainForm" ><!--Форма с контентом-->
 		<header>
 			<p class="headerP">Main menu</p>
 		</header>
-		<div class = "contentDiv">
-			<div class="leftDiv">
+		<div class = "contentDiv"><!--Дивчик с контентом страницы-->
+			<div class="leftDiv"><!--Дивчик с кнопками навигации-->
 				<button class="mainButton" onclick="jcShow()">View all PCs with Java control(JC)</button>
 				<br/>
 				<button class="mainButton" onclick="settingsShow()">Settings</button>
 				<br/>
 				<button class="mainButton" onclick="logout()" >Log out</button>
 			</div>
-			<div class="rightDiv">
-				<div id="jcShow">
+			<div class="rightDiv"><!--Дивчик с контентом-->
+				<div id="jcShow"><!--Дивчик с таблицей ПК-->
 					<div class="JCDiv">
 						<table id = "tableUsers">
 							<thead>
@@ -50,14 +53,14 @@
 					</div>
 					<div class="addPC">
 						<p style="color: #fff;">Scanning IP addresses</p>
-						<form>
+						<form id = "scanForm">
 							<p><input type="text" name="ipAddress" placeholder="IP address" maxlength="16" minlength="7" pattern="((25[0-5]|(2[0-4]|1\d|[0-9]|)\d)\.?\b){4}" required></p>
 							<p><input type="text" name="port" placeholder="Port (default 5556)" maxlength="5" pattern="[0-9]*"></p>
 							<button id="scanButton" class="mainButton">Scan</button>
 						</form>
 					</div>
 				</div>
-				<div id="settingsShow">
+				<div id="settingsShow"><!--Дивчик с настройками-->
 					<p style="margin-left: 11px;font-size: 20px;">Server settings</p>
 					<div class="settingsBox">
 						<button class="settingsButton" onclick="rebootServer()">Reboot server</button>
@@ -67,21 +70,50 @@
 					<div class="settingsBox">
 						<button class="settingsButton" onclick="changePassword()">Change password</button>
 					</div>
-				</div>
-				<div id="controlShow">
-					<p style="margin-left: 11px;font-size: 20px;">Remote access</p>
-					<div class="settingsBox">
-						<button class="settingsButton" onclick="sendCommandToUserPC('powerOff')">Power off</button>
-						<button class="settingsButton" onclick="sendCommandToUserPC('reboot')">Reboot</button>
-						<button class="settingsButton" onclick="sendCommandToUserPC('logOut')">Log out</button>
+					<div id = "changePassDiv">
+						<form id = "#changePassForm">
+							<p>Change password</p>
+							<br/>
+							<input id="oldPassword" type="password" placeholder="Old password" name="oldPassword" style="margin-left: 15px;margin-right: 15px;margin-bottom: 10px;" required>
+							<br/>
+							<input id="newPassword" type="password" placeholder="New password" name="newPassword" style="margin-bottom: 10px;" required>
+							<br/>
+							<input id="confirmPassword" type="password" placeholder="Confirm the new password" name="сonfirmPassword" style="margin-bottom: 10px;" required>
+							<br/>
+							<button id = "scanButton" class="mainButton" style="margin-bottom: 10px;">Change</button>
+						</form>
 					</div>
-					<p style="margin-left: 11px;font-size: 20px;">Managing a table entry</p>
-					<div class="settingsBox">
-						<button class="settingsButton" onclick="deleteUser()">Delete</button>
+				</div>
+				<div id="controlShow"><!--Дивчик с управлением ПК-->
+					<div id="control">
+						<p style="margin-left: 11px;font-size: 20px;">Remote access</p>
+						<div class="settingsBox">
+							<button class="settingsButton" onclick="sendCommandToUserPC('powerOff')">Power off</button>
+							<button class="settingsButton" onclick="sendCommandToUserPC('reboot')">Reboot</button>
+							<button class="settingsButton" onclick="sendCommandToUserPC('logOut')">Log out</button>
+							<button class="settingsButton" onclick="sendCommandToUserPC('screen')">Screenshot</button>
+						</div>
+						<p style="margin-left: 11px;font-size: 20px;">Managing a table entry</p>
+						<div class="settingsBox">
+							<button class="settingsButton" onclick="deleteUser()">Delete</button>
+							<button class="settingsButton" onclick="updateUser()">Update</button>
+						</div>
+						<div id = "updateDiv">
+							<p>Update field</p>
+							<form id = "updateForm">
+								<p style="margin-left: 10px;margin-right: 10px;"><input id = "ipUp" type="text" name="ipAddress" placeholder="IP address" maxlength="16" minlength="7" pattern="((25[0-5]|(2[0-4]|1\d|[0-9]|)\d)\.?\b){4}" required></p>
+								<p style="margin-left: 10px;margin-right: 10px;"><input id = "portUp"  type="text" name="port" placeholder="Port (default 5556)" maxlength="5" pattern="[0-9]*"></p>
+								<button id="scanButton" class="mainButton" style="margin-bottom: 10px;">Update</button>
+							</form>
+						</div>
+					</div>
+					<div id = "screenShow">
 					</div>
 				</div>
-				<div id = "logShow">
+				<div id = "logShow"><!--Дивчик с логами-->
+					<label for="logView"></label><textarea id = "logView" readonly>
 
+					</textarea>
 				</div>
 			</div>
 		</div>
