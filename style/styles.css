@@ -205,6 +205,9 @@ input:focus{
   border-radius: 25px;
   border: solid 2px gray;
 }
+#updateScreen{
+  display: none;
+}
 @media (max-width: 430px){
   #logView{
     font-size: 12px;

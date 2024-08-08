@@ -23,21 +23,24 @@ function showUsers(){
     });
 }
 function deleteUser(){
-    $.ajax({
-        url: API_URL + "api/jc/deleteUserPC",
-        method: "post",
-        dataType: "json",
-        data: {ipAddress : ipGlobal, port: portGlobal},
-        success: function(data) {
-            if(data.status === "OK"){
-                alert("Successful!");
-                jcShow();
+    let choose = confirm("You are sure?");
+    if(choose){
+        $.ajax({
+            url: API_URL + "api/jc/deleteUserPC",
+            method: "post",
+            dataType: "json",
+            data: {ipAddress : ipGlobal, port: portGlobal},
+            success: function(data) {
+                if(data.status === "OK"){
+                    alert("Successful!");
+                    jcShow();
+                }
+            },
+            error: function (data){
+                errorStatus(data.responseJSON.status);
             }
-        },
-        error: function (data){
-            errorStatus(data.responseJSON.status);
-        }
-    });
+        });
+    }
 }
 function updateUser(){ // Модалка с обновлением полей
     $("#updateDiv").bPopup();

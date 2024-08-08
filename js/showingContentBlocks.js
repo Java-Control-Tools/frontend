@@ -4,6 +4,7 @@ function jcShow() {
     $("#settingsShow").hide();
     $("#controlShow").hide();
     $("#logShow").hide();
+    $("#updateScreen").hide();
     showUsers();
 }
 function settingsShow(){
@@ -11,6 +12,7 @@ function settingsShow(){
     $("#jcShow").hide();
     $("#controlShow").hide();
     $("#settingsShow").show();
+    $("#updateScreen").hide();
     $("#logShow").hide();
 }
 function controlShow(ipAddress, port, status){ //Заход на пользователя
@@ -24,4 +26,5 @@ function controlShow(ipAddress, port, status){ //Заход на пользов�
     $("#screenShow").hide();
     $("#settingsShow").hide();
     $("#logShow").hide();
+    $("#updateScreen").hide();
 }

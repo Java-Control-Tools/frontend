@@ -1,4 +1,4 @@
-let ipGlobal; //Похуй + похуй потом исправлю 
+let ipGlobal;
 let portGlobal;
 let statusGlobal;
 const API_URL = "http://localhost:8080/";
@@ -89,6 +89,7 @@ function sendCommandToUserPC(comm) {
 				success: function(data) {
 					$("#control").hide();
 					$("#screenShow").empty().show().append("<img src= " + API_URL + "files/photo?id="+ Math.random() +"  alt=''/>");
+					$("#updateScreen").show();
 				},
 				error: function (data){
 					errorStatus(data.responseJSON.status);
